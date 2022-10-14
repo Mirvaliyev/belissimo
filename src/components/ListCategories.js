@@ -33,7 +33,7 @@ export default class ListCategories extends Component {
     const { categories } = this.state
     const { categoryChange, currentcategory } = this.props
     return (
-      <div className=' w-1/4 p-[30px]'>
+      <div className='md:w-[20%] p-[10px] w-full'>
         <h4 className=' font-bold text-black'>Kategoriyalar ro'yxati</h4>
         <hr />
         <ul className='w-full rounded-sm border-[#b0b0b0] border-[1px] border-b-0 mt-[20px]'>

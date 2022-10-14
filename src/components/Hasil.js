@@ -65,6 +65,7 @@ class Hasil extends Component {
         axios
             .put(API_URL + "basket/" + this.state.basketDetails.id, data)
             .then(res => {
+                this.props.getListBasket()
                 swal({
                     title: "Yangilash Bajarildi!",
                     text: data.product.name + " buyurtmasi yangilandi!",
@@ -82,6 +83,7 @@ class Hasil extends Component {
         axios
             .delete(API_URL + "basket/" + id)
             .then(res => {
+                this.props.getListBasket()
                 swal({
                     title: "Buyurtma olib tashlandi!",
                     text: "Ushbu buyurtma savatdan olib tashlandi!",
@@ -97,13 +99,13 @@ class Hasil extends Component {
     render() {
         const { basket } = this.props
         return (
-            <div className=' w-1/4 p-[30px]'>
+            <div className='md:w-[25%] w-full p-[10px] mb-[100px]'>
                 <h4 className=' font-bold text-black'>Natijalar</h4>
                 <hr />
-                <ul className='w-full'>
+                <ul className='w-full max-h-[400px] overflow-y-scroll'>
                     {
                         basket.map((menubasket) => (
-                            <li onClick={() => this.handleShow(menubasket)} className=' border-b-[1px] border-gray-300 cursor-pointer p-[10px] flex items-center justify-between hover:bg-gray-200'>
+                            <li onClick={() => this.handleShow(menubasket)} className=' border-b-[1px] border-gray-300 cursor-pointer p-[10px] flex items-center justify-between flex-wrap hover:bg-gray-200'>
                                 <div className='flex items-center'>
                                     <span className=' rounded-full bg-[#0f4] w-[30px] aspect-square flex items-center justify-center'>
                                         {menubasket.quantity}
@@ -115,7 +117,7 @@ class Hasil extends Component {
                                     </h4>
                                 </div>
                                 <div className=''>
-                                    <strong className=' text-[16px]'>{menubasket.total_price}.so'm</strong>
+                                    <strong className='ml-[20px] text-[16px]'>{menubasket.total_price}.so'm</strong>
                                 </div>
                             </li>
                         ))

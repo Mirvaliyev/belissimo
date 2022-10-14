@@ -35,18 +35,30 @@ export default class Home extends Component {
         console.log(error)
       })
   }
-  componentDidUpdate(prevState) {
-    if (this.state.basket !== prevState.basket) {
-      axios
-        .get(API_URL + "basket")
-        .then(res => {
-          const basket = res.data
-          this.setState({ basket })
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }
+  // componentDidUpdate(prevState) {
+  //   if (this.state.basket !== prevState.basket) {
+  //     axios
+  //       .get(API_URL + "basket")
+  //       .then(res => {
+  //         const basket = res.data
+  //         this.setState({ basket })
+  //       })
+  //       .catch(error => {
+  //         console.log(error)
+  //       })
+  //   }
+  // }
+
+  getListBasket = () => {
+    axios
+      .get(API_URL + "basket")
+      .then(res => {
+        const basket = res.data
+        this.setState({ basket })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   categoryChange = (value) => {
@@ -79,6 +91,7 @@ export default class Home extends Component {
           axios
             .post(API_URL + "basket", basket)
             .then(res => {
+              this.getListBasket()
               swal({
                 title: "Buyruq bajarildi!",
                 text: basket.product.name + " savatga qo'shildi",
@@ -100,6 +113,7 @@ export default class Home extends Component {
           axios
             .put(API_URL + "basket/" + res.data[0].id, basket)
             .then(res => {
+              this.getListBasket()
               swal({
                 title: "Buyruq bajarildi!",
                 text: basket.product.name + " savatga qo'shildi",
@@ -124,12 +138,12 @@ export default class Home extends Component {
     const { menus, currentcategory, basket } = this.state
     return (
       <div className="">
-        <main className='w-full flex px-[10px]'>
+        <main className='w-full md:flex px-[10px]'>
           <ListCategories categoryChange={this.categoryChange} currentcategory={currentcategory} />
-          <div className='w-1/2 p-[30px]'>
+          <div className='md:w-[55%] w-full p-[10px]'>
             <h4 className='text-black font-bold'>Mahsulotlar</h4>
             <hr />
-            <div className='w-full grid gap-[20px] grid-cols-3 py-[20px]'>
+            <div className='w-full grid gap-[20px] lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 py-[20px]'>
               {
                 menus.map((menu) =>
                   <Menus
@@ -141,7 +155,7 @@ export default class Home extends Component {
               }
             </div>
           </div>
-          <Hasil basket={basket} {...this.props} />
+          <Hasil basket={basket} {...this.props} getListBasket={this.getListBasket}/>
         </main>
       </div>
     )
