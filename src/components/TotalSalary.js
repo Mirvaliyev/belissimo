@@ -29,7 +29,7 @@ export default class TotalSalary extends Component {
           Jami to'lov 
           <span className='font-bold ml-[30px]'>{total_salary}.so'm</span>
         </h2>
-        <Link to={'/success'} className=' bg-[#2266A8] rounded-sm flex justify-center items-center text-white p-1 mt-2' onClick={() => this.submitTotalSalary(total_salary)}>
+        <Link to={'/success'} className=' bg-[#2266A8] rounded-sm flex justify-center items-center text-white py-2 px-3 mt-2' onClick={() => this.submitTotalSalary(total_salary)}>
           <FontAwesomeIcon icon={faShoppingCart} className='mr-2' /> Xarid qilish
         </Link>
       </div>
